@@ -231,9 +231,14 @@ LR_SCHEDULE = [    # (multiplier, epoch to start) tuples
 
 # The input tensor is in the range of [0, 255], we need to scale them to the
 # range of [0, 1]
-MEAN_RGB = [0.485 * 255, 0.456 * 255, 0.406 * 255]
-STDDEV_RGB = [0.229 * 255, 0.224 * 255, 0.225 * 255]
+# MEAN_RGB = [0.485 * 255, 0.456 * 255, 0.406 * 255]
+# STDDEV_RGB = [0.229 * 255, 0.224 * 255, 0.225 * 255]
+MEAN_RGB = 115
+STDDEV_RGB = 58
 
+def rgb_normalization():
+    MEAN_RGB = [0.485 * 255, 0.456 * 255, 0.406 * 255]
+    STDDEV_RGB = [0.229 * 255, 0.224 * 255, 0.225 * 255]
 
 def learning_rate_schedule(current_epoch):
   """Handles linear scaling rule, gradual warmup, and LR decay.
