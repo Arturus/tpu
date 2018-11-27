@@ -44,6 +44,16 @@ def image_serving_input_fn():
       images, {'image_bytes': image_bytes_list})
 
 
+def decoded_image_serving_input_fn():
+    """Serving input fn for decoded images of any size."""
+    images = tf.placeholder(
+        shape=[None, None, None, 3],
+        dtype=tf.float32,
+    )
+    return tf.estimator.export.ServingInputReceiver(
+        images, {'image_input': images})
+
+
 class ImageNetTFExampleInput(object):
   """Base class for ImageNet input_fn generator.
 
