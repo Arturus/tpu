@@ -158,6 +158,13 @@ def main(unused_argv):
       resnet_classifier.train(
           input_fn=imagenet_train.input_fn, max_steps=FLAGS.train_steps)
 
+  if FLAGS.export_dir is not None:
+    # The guide to serve a exported TensorFlow model is at:
+    #    https://www.tensorflow.org/serving/serving_basic
+    tf.logging.info('Starting to export model.')
+    resnet_classifier.export_saved_model(
+        export_dir_base=FLAGS.export_dir,
+        serving_input_receiver_fn=imagenet_input.decoded_image_serving_input_fn)
   else:
     assert FLAGS.mode == 'eval'
 
