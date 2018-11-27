@@ -41,12 +41,6 @@ FLAGS = tf.flags.FLAGS
 
 CKPT_PATTERN = r'model\.ckpt-(?P<gs>[0-9]+)\.data'
 
-flags.DEFINE_string(
-    'data_dir_small', default=None,
-    help=('The directory where the resized (160x160) ImageNet input data is '
-          'stored. This is only to be used in conjunction with the '
-          'resnet_benchmark.py script.'))
-
 flags.DEFINE_bool(
     'use_fast_lr', default=False,
     help=('Enabling this uses a faster learning rate schedule along with '
@@ -95,7 +89,7 @@ def main(unused_argv):
     imagenet_train_small = imagenet_input.ImageNetInput(
         is_training=True,
         image_size=128,
-        data_dir=FLAGS.data_dir_small,
+        data_dir=FLAGS.data_dir,
         num_parallel_calls=FLAGS.num_parallel_calls,
         use_bfloat16=True,
         transpose_input=FLAGS.transpose_input,
@@ -103,7 +97,7 @@ def main(unused_argv):
     imagenet_eval_small = imagenet_input.ImageNetInput(
         is_training=False,
         image_size=128,
-        data_dir=FLAGS.data_dir_small,
+        data_dir=FLAGS.data_dir,
         num_parallel_calls=FLAGS.num_parallel_calls,
         use_bfloat16=True,
         transpose_input=FLAGS.transpose_input,
