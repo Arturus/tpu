@@ -93,7 +93,7 @@ def main(unused_argv):
         num_parallel_calls=FLAGS.num_parallel_calls,
         use_bfloat16=True,
         transpose_input=FLAGS.transpose_input,
-        cache=True)
+        cache=False)
     imagenet_eval_small = imagenet_input.ImageNetInput(
         is_training=False,
         image_size=128,
@@ -101,7 +101,7 @@ def main(unused_argv):
         num_parallel_calls=FLAGS.num_parallel_calls,
         use_bfloat16=True,
         transpose_input=FLAGS.transpose_input,
-        cache=True)
+        cache=False)
     imagenet_train_large = imagenet_input.ImageNetInput(
         is_training=True,
         image_size=288,
