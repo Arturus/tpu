@@ -47,6 +47,9 @@ flags.DEFINE_bool(
           'different image sizes in the input pipeline. This is only to be '
           'used in conjunction with the resnet_benchmark.py script.'))
 
+flags.DEFINE_integer(
+    'image_size', default=224,
+    help='Image size for train/eval')
 
 # Number of training and evaluation images in the standard ImageNet dataset
 NUM_TRAIN_IMAGES = 1281167
@@ -75,11 +78,13 @@ def main(unused_argv):
       is_training=True,
       data_dir=FLAGS.data_dir,
       use_bfloat16=True,
+      image_size=FLAGS.image_size,
       transpose_input=FLAGS.transpose_input)
   imagenet_eval = imagenet_input.ImageNetInput(
       is_training=False,
       data_dir=FLAGS.data_dir,
       use_bfloat16=True,
+      image_size=FLAGS.image_size,
       transpose_input=FLAGS.transpose_input)
 
   if FLAGS.use_fast_lr:
